@@ -1,0 +1,24 @@
+{
+  "name": "dkesberg/slim-twig-translation-extension",
+  "description": "Twig function for Illuminate\\Translation\\Translator in Slim framework",
+  "keywords": ["microframework", "slim", "twig", "illuminate", "translation"],
+  "homepage": "http://github.com/dkesberg/slim-twig-translation-extension",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "dkesbrg",
+      "email": "dkesberg@gmail.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.0",
+    "slim/slim": ">=2.3.0",
+    "slim/views": "0.1.*",
+    "illuminate/translation": ">=4.0"
+  },
+  "autoload": {
+    "psr-0": {
+      "Dkesberg\\Slim\\Twig\\Extension": "src/"
+    }
+  }
+}
