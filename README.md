@@ -81,7 +81,7 @@ $app->hook('slim.before', function () use ($app) {
   $locale = substr($locale,0,2);
 
   // Set translator instance
-  $translator = new Translator(new FileLoader(new Filesystem(), __DIR__ . '/lang'), 'en');
+  $translator = new Translator(new FileLoader(new Filesystem(), __DIR__ . '/lang'), $locale);
   $translator->setFallback('en');
   $app->translator = $translator;
 });
