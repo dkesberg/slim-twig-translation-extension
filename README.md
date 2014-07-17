@@ -14,7 +14,7 @@ Create a composer.json file in your project root:
 ```json
 {
     "require": {
-        ""dkesberg/slim-twig-translation-extension": "dev-master"
+        "dkesberg/slim-twig-translation-extension": "dev-master"
     }
 }
 ```
@@ -42,11 +42,15 @@ $view->parserExtensions = array(
 
 In your twig template you would write:
 
+```
   {{ translate('male') }}
+```
   
 You can also use the shorthand:
 
+```
   {{ _('male') }}
+```
 
 ### Adding Illuminate/Translation/Translator to slim
 
