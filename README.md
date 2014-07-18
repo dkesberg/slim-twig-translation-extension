@@ -87,7 +87,7 @@ use Illuminate\Filesystem\Filesystem;
 use Illuminate\Translation\FileLoader;
 
 // detect language and set translator
-$app->hook('slim.before', function () use ($app) {
+$app->hook('slim.before', function() use ($app) {
   $env = $app->environment();
   
   // Extract locale
