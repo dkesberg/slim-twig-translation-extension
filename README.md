@@ -3,7 +3,7 @@
 This repository provides a twig extension class for the twig view parser. 
 The class adds a translate helper function  for the use in twig templates.
 The translator function tries to call the trans() function of an 
-Illuminate\Translation\Translator object in the slim DI container. 
+Illuminate\Translation\Translator object in the slim container. 
 
 ## How to install
 
@@ -66,7 +66,20 @@ $translator->setFallback('en');
 $app->translator = $translator;
 ```
 
-Using slim hooks:
+Singleton ressource:
+
+```php
+use Illuminate\Translation\Translator;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Translation\FileLoader;
+
+$app->container->singleton('translator', function() {
+  return new Translator(new FileLoader(new Filesystem(), __DIR__ . '/lang'), 'en');
+});
+$app->translator->setFallback('en');
+```
+
+Using slim hooks and singleton:
 
 ```php
 use Illuminate\Translation\Translator;
@@ -77,12 +90,14 @@ use Illuminate\Translation\FileLoader;
 $app->hook('slim.before', function () use ($app) {
   $env = $app->environment();
   
+  // Extract locale
   $locale = Locale::acceptFromHttp($env['HTTP_ACCEPT_LANGUAGE']);
   $locale = substr($locale,0,2);
 
   // Set translator instance
-  $translator = new Translator(new FileLoader(new Filesystem(), __DIR__ . '/lang'), $locale);
-  $translator->setFallback('en');
-  $app->translator = $translator;
+  $app->container->singleton('translator', function() use ($app, $locale) {
+    return new Translator(new FileLoader(new Filesystem(), __DIR__ . '/lang'), $locale);
+  });
+  $app->translator->setFallback('en');
 });
 ```
