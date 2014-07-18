@@ -92,11 +92,11 @@ $app->hook('slim.before', function () use ($app) {
   
   // Extract locale
   $locale = Locale::acceptFromHttp($env['HTTP_ACCEPT_LANGUAGE']);
-  $locale = substr($locale,0,2);
+  $app->locale = substr($locale,0,2);
 
   // Set translator instance
-  $app->container->singleton('translator', function() use ($app, $locale) {
-    return new Translator(new FileLoader(new Filesystem(), __DIR__ . '/lang'), $locale);
+  $app->container->singleton('translator', function($app) {
+    return new Translator(new FileLoader(new Filesystem(), __DIR__ . '/lang'), $app->locale);
   });
   $app->translator->setFallback('en');
 });
