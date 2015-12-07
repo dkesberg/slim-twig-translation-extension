@@ -7,7 +7,7 @@ Illuminate\Translation\Translator object in the slim container.
 
 ## How to install
 
-#### using [Composer](http://getcomposer.org/)
+#### Using [Composer](http://getcomposer.org/)
 
 Create a composer.json file in your project root:
     
@@ -43,13 +43,13 @@ $view->parserExtensions = array(
 In your twig template you would write:
 
 ```
-  {{ translate('male') }}
+  {{ translate('mails.salutation.male') }}
 ```
   
 You can also use the shorthand:
 
 ```
-  {{ _('male') }}
+  {{ _('mails.salutation.male') }}
 ```
 
 ### Adding Illuminate/Translation/Translator to slim
@@ -100,4 +100,39 @@ $app->hook('slim.before', function() use ($app) {
   });
   $app->translator->setFallback('en');
 });
+```
+
+### Language files
+
+I am wrapping the Illuminate\Translation\Translator. The language files for the translator default structure used in the Laravel framework.
+
+In the lang directory there should be a subdirectory for each language.
+```
+/lang
+       /en
+            mails.php
+            validation.php
+       /de
+            mails.php
+            validation.php
+```
+
+The language files simply return an array of keyed strings.
+
+```php
+<?php
+
+return array(
+  'salutation' => array(
+    'male'    => 'Dear Mr.',
+    'female'  => 'Dear Mrs.',
+    'unknown' => 'Dear Sir or Madam'
+  )
+)
+```
+
+The first part of the string passed to the translate function is the name of the language file, the second part is the key you want to retrieve. The second part uses the dot notation for multidimensional arrays.
+
+```php
+{{ _('mails.salutation.male') }}
 ```
