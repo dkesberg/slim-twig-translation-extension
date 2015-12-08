@@ -104,7 +104,7 @@ $app->hook('slim.before', function() use ($app) {
 
 ### Language files
 
-I am wrapping the Illuminate\Translation\Translator. The language files for the translator default structure used in the Laravel framework. For more information see also: http://laravel.com/docs/4.2/localization
+I am wrapping the Illuminate\Translation\Translator. The language files for the translator use the same structure used in the Laravel framework. For more information see also: http://laravel.com/docs/4.2/localization
 
 In the lang directory there should be a subdirectory for each language.
 ```
